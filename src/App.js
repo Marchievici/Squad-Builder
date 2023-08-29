@@ -1,7 +1,6 @@
 import AddNewPlayer from "./components/AddNewPlayer";
 import Field from "./components/Field";
 import List from "./components/List";
-import playersList from "../src/players";
 import Title from "./components/Title";
 import { changePosToFitSquad } from "../src/helper functions/positionChanger";
 import { useState, useEffect, useRef } from "react";
@@ -26,7 +25,7 @@ const fetchOptions = {
 };
 
 function App() {
-  const [players, setPlayers] = useState(playersList);
+  const [players, setPlayers] = useState([]);
   const [filteredPosition, setFilteredPosition] = useState("all");
   const [filteredPlayersList, setFilteredPlayersList] = useState(players);
   const [posSelected, setPosSelected] = useState(null);
