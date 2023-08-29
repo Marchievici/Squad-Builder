@@ -68,7 +68,7 @@ const AddNewPlayer = ({ onAddPlayerInList }) => {
     </div>
   ) : (
     <Button className={"add-custom-player-btn"} onClick={handleFormVissibility}>
-      Create your custom player
+      Create custom player
     </Button>
   );
 };

@@ -38,6 +38,8 @@ function App() {
     "CB",
     "GK",
   ]);
+  const [pageTotal, setPageTotal] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
   const listFocus = useRef(null);
 
   const handleListFocus = () => {
@@ -46,8 +48,10 @@ function App() {
 
   useEffect(() => {
     const fetchPlayers = async () => {
+      const controller = new AbortController();
+
       const res = await fetch(
-        `https://futdb.app/api/players?page=2`,
+        `https://futdb.app/api/players?page=${currentPage}`,
         fetchOptions
       );
 
@@ -59,9 +63,11 @@ function App() {
         id: player.id,
       }));
       setPlayers(playerInfos);
+      setPageTotal(data.pagination.pageTotal);
+      return () => controller.abort();
     };
     fetchPlayers();
-  }, []);
+  }, [currentPage]);
 
   const handleAddPlayerInField = (name, overall, position) => {
     setPositions((positions) =>
@@ -108,7 +114,7 @@ function App() {
   return (
     <>
       <Title />
-      <div className="app">
+      <main className="app">
         <AddNewPlayer
           players={players}
           onAddPlayerInList={handleAddPlayerInList}
@@ -119,6 +125,9 @@ function App() {
           filteredPlayersList={filteredPlayersList}
           onFilterPosition={handleFilteredPosition}
           onAddPlayerInField={handleAddPlayerInField}
+          pageTotal={pageTotal}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
         />
         <Field
           posSelected={posSelected}
@@ -128,7 +137,7 @@ function App() {
           onRemovePlayer={handleRemoveFieldPlayer}
           handleListFocus={handleListFocus}
         />
-      </div>
+      </main>
     </>
   );
 }

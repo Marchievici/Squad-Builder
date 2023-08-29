@@ -1,70 +1,26 @@
-# Getting Started with Create React App
+# Squad Builder
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to Squad Builder - your tool for crafting the perfect squad!
 
-## Available Scripts
+## Description
 
-In the project directory, you can run:
+The Squad Builder is a comprehensive and user-friendly tool designed to assist FIFA Ultimate Team enthusiasts in creating, customizing, and visualizing their dream squads. It is inspired by Futbin
+Squad Builder but it's designed for teams in a 5 + 1 format, which are more common in real life when
+you play with your friends. You can add yourself and other friends as players in the squad.
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
+- **Player Database**: Access an extensive player database with accurate stats and attributes from the FUT game.
+- **Custom Squad Creation**: Click on the positions in the field, then select a player from the list.
+- **Add Custom players to the list**: Press the 'Create custom player' button, complete the form, and add
+  the player into the list. After that, you can add the custom player card from the list into your squad.
+  ==If you change the page from the list, the custom player card will disappear from the list, but if you already added it in squad, it will remain there(you can remove any player from squad anytime).==
+
+## Getting Started
+
+1. Clone the repository: `git clone https://github.com/Marchievici/Squad-Builder.git`
+2. Navigate to the project directory: `cd squad-builder`
+3. Install dependencies: `npm install`
+4. Start the app: `npm start`
+
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
