@@ -4,6 +4,9 @@ import List from "./components/List";
 import Title from "./components/Title";
 import { changePosToFitSquad } from "../src/helper functions/positionChanger";
 import { useState, useEffect, useRef } from "react";
+import PlayersList from "./components/PlayersList";
+import FilterPlayers from "./components/FilterPlayers";
+import Pagination from "./components/Pagination";
 
 const KEY = "f7906f4c-3049-434c-9170-8761e414ed23";
 
@@ -13,19 +16,10 @@ const fetchOptions = {
     "Content-type": "application/json",
     "X-AUTH-TOKEN": KEY,
   },
-
-  pagination: {
-    countCurrent: 0,
-    countTotal: 0,
-    pageCurrent: 0,
-    pageTotal: 0,
-    itemsPerPage: 0,
-  },
-  items: {},
 };
 
 function App() {
-  const [players, setPlayers] = useState([]);
+  const [players, setPlayers] = useState(null);
   const [filteredPosition, setFilteredPosition] = useState("all");
   const [filteredPlayersList, setFilteredPlayersList] = useState(players);
   const [posSelected, setPosSelected] = useState(null);
@@ -37,8 +31,9 @@ function App() {
     "CB",
     "GK",
   ]);
-  const [pageTotal, setPageTotal] = useState(null);
+  const [pageTotal, setPageTotal] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
   const listFocus = useRef(null);
 
   const handleListFocus = () => {
@@ -46,26 +41,30 @@ function App() {
   };
 
   useEffect(() => {
+    const controller = new AbortController();
     const fetchPlayers = async () => {
-      const controller = new AbortController();
+      try {
+        const res = await fetch(
+          `https://futdb.app/api/players?page=${currentPage}`,
+          { ...fetchOptions, signal: controller.signal }
+        );
 
-      const res = await fetch(
-        `https://futdb.app/api/players?page=${currentPage}`,
-        fetchOptions
-      );
-
-      const data = await res.json();
-      const playerInfos = data.items.map((player) => ({
-        name: player.commonName,
-        position: changePosToFitSquad(player.position),
-        overall: player.rating,
-        id: player.id,
-      }));
-      setPlayers(playerInfos);
-      setPageTotal(data.pagination.pageTotal);
-      return () => controller.abort();
+        const data = await res.json();
+        const playerInfos = data.items
+          .filter((player) => player.name !== "")
+          .map((player) => ({
+            name: player.commonName,
+            position: changePosToFitSquad(player.position),
+            overall: player.rating,
+            id: player.id,
+          }));
+        setPlayers(playerInfos);
+        setPageTotal(data.pagination.pageTotal);
+      } catch (err) {}
     };
+    setIsLoading(false);
     fetchPlayers();
+    return () => controller.abort();
   }, [currentPage]);
 
   const handleAddPlayerInField = (name, overall, position) => {
@@ -118,16 +117,26 @@ function App() {
           players={players}
           onAddPlayerInList={handleAddPlayerInList}
         />
-        <List
-          listFocus={listFocus}
-          filteredPosition={filteredPosition}
-          filteredPlayersList={filteredPlayersList}
-          onFilterPosition={handleFilteredPosition}
-          onAddPlayerInField={handleAddPlayerInField}
-          pageTotal={pageTotal}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-        />
+        <List listFocus={listFocus}>
+          <FilterPlayers
+            filteredPosition={filteredPosition}
+            onFilterPosition={handleFilteredPosition}
+          />
+          <PlayersList
+            filteredPlayersList={filteredPlayersList}
+            onAddPlayerInField={handleAddPlayerInField}
+            pageTotal={pageTotal}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            isLoading={isLoading}
+          />
+          <Pagination
+            className={"pagination"}
+            pageTotal={pageTotal}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+        </List>
         <Field
           posSelected={posSelected}
           onFilterPosition={handleFilteredPosition}
