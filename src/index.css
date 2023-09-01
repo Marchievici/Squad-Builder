@@ -327,10 +327,11 @@ li {
 }
 
 .pagination {
-  text-align: center;
-  display: inline-flex;
+  display: flex;
+  align-self: flex-end;
   gap: 1.2rem;
-  margin: 0 auto;
+  margin: auto;
+  margin-bottom: 0;
   background-color: #e1e1e1;
   border-radius: 1rem;
 }
