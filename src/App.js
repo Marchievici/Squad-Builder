@@ -53,7 +53,7 @@ function App() {
         const playerInfos = data.items
           .filter((player) => player.name !== "")
           .map((player) => ({
-            name: player.commonName,
+            name: player.name,
             position: changePosToFitSquad(player.position),
             overall: player.rating,
             id: player.id,

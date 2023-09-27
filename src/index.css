@@ -233,7 +233,7 @@ li {
 
 .field > .card {
   font-size: 1.6rem;
-  max-width: 16rem;
+  max-width: 12rem;
   max-height: 12rem;
 }
 
@@ -275,6 +275,11 @@ li {
   top: -0.4rem;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.field li p {
+  text-align: center;
+  block-size: fit-content;
 }
 
 .in-field-player {
